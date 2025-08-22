@@ -1,12 +1,18 @@
-use std::process::Command;
+use std::thread;
 
 fn main() {
-    let mut cmd = Command::new("cargo");
-    cmd.arg("run");
+    let num_threads = 11; // number of CPU cores
 
-    let hello_1 = cmd.spawn().expect("failed to spawn").wait_with_output().expect("failed output");
-    let hello_2 = cmd.spawn().expect("failed to spawn").wait_with_output().expect("failed output");
-
-    println!("First run: {}", String::from_utf8_lossy(&hello_1.stdout));
-    println!("Second run: {}", String::from_utf8_lossy(&hello_2.stdout));
+    for i in 0..num_threads {
+        thread::spawn(move || {
+            println!("Thread {i} starting...");
+            loop {
+                let _ = 2 * 2;
+            }
+        });
+    }
+    
+    loop {
+        thread::park();
+    }
 }
