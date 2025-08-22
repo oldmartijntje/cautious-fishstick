@@ -1,11 +1,8 @@
-use std::io::{stdin, stdout, Write};
-use termion::event::Key;
+use std::io::{Write};
 use rand::seq::{IndexedRandom};
-use termion::input::TermRead;
-use termion::raw::IntoRawMode;
 use std::{thread, time};
 use std::io;
-use rand::{random_range, rng};
+use rand::{rng};
 
 fn main() {
     let first_words = ["aquatic", "rhythmic", "pregnant", "digital", "diagonal", "cool", "interesting", "huge", "tiny", "medium",
@@ -18,15 +15,22 @@ fn main() {
     io::stdin()
         .read_line(&mut enter_press)
         .expect("Failed to read line");
+    let mut i:u64 = 100;
     loop {
         let mut rng = rng();
         let word1 = first_words.choose(&mut rng).unwrap();
         let word2 = second_words.choose(&mut rng).unwrap();
-        print!("Repository name: {}-{}", word1, word2);
-        thread::sleep(time::Duration::from_millis(5));
+        print!("{}-{}", word1, word2);
         print!("\r                                                \r"); // overwrite with spaces, then return
+        i = i + 1;
+        if i <= 1000 {
+            thread::sleep(time::Duration::from_millis(10));
+        }
+        if i >= 1000 {
+            break;
+        }
     }
-    print!("Okay boomer");
+    println!("Okay boomer");
     std::io::Write::flush(&mut std::io::stdout()).unwrap();
 
     thread::sleep(time::Duration::from_secs(1));
