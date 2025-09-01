@@ -1,5 +1,6 @@
 use ::iced::theme::Theme;
-use iced::{Alignment, Sandbox, Settings};
+use ::iced::widget::Text;
+use iced::{Alignment, Sandbox, Settings, Element};
 
 pub fn main() -> iced::Result {
     RustUI::run(Settings::default())
@@ -44,5 +45,18 @@ impl Sandbox for RustUI {
 
     fn theme(&self) -> Theme {
         self.theme.clone() // return a copy of the theme.
+    }
+
+    fn update(&mut self, message: Message) {
+        match message {
+            Message::ToggleTheme => {}
+            Message::LoginFIeldCHanged(email, password) => {}
+            Message::LoginSubmit => {}
+            Message::Router(route) => {}
+        }
+    }
+
+    fn view(&self) -> Element<Message> {
+        Text::new("Hello, World").into()
     }
 }
