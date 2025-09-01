@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "communicator"
+name = "cautious-fishstick"
 version = "0.1.0"
